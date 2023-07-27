@@ -1,0 +1,43 @@
+<% content_for :title do %>
+  Foodlog &ndash; <%=
+Time.now.to_formatted_s(:long)
+ %>
+<%end%>
+<div id="entries" class="columns mt-6 is-centered">
+  <% @entries.each do |entry| %>
+    <div class="column is-one-quarter">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            <%= entry.meal_type %> | <%= entry.category.title if entry.category.present? %>
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <p><span class="has-text-wight-bold">
+                <%= entry.calories %>
+              </span>Calories</p>
+            <p><span class="has-text-wight-bold">
+                <%= entry.proteins %>
+              </span>Grams of Protein</p>
+            <p><span class="has-text-wight-bold">
+                <%= entry.carbohydrates %>
+              </span>Grams of Carbohydrates</p>
+            <p><span class="has-text-wight-bold">
+                <%= entry.fats %>
+              </span>Grams of Fats</p>
+            <p class="italic">Logged <%= time_ago_in_words(entry.created_at)%> ago</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <%= link_to "Show", entry, class: "card-footer-item" %>
+          <%= link_to "Edit", edit_entry_path(entry), class: "card-footer-item" %>
+          <%= link_to "Destroy", entry, method: :delete, data:{confirm: 'Are You Sure!'}, class: "card-footer-item" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="columns is-centered mt-6">
+  <%= link_to "View all entries", archives_index_path, class:"button is-link is-centered is-outlined" %>
+</div>

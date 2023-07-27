@@ -1,0 +1,7 @@
+<% content_for :title do %>
+  <%= @entry.meal_type %> &ndash; <%=
+Time.now.to_formatted_s(:long)
+ %>
+<%end%>
+<%# <p style="color: green"><%#= notice %></p>
+<%= render @entry %>
